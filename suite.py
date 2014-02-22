@@ -8,9 +8,7 @@ log = logging.getLogger('vb')
 log.setLevel(logging.INFO)
 #log.addHandler(logging.StreamHandler(sys.stdout))
 
-benchmarks = collect_benchmarks(
-    ['vb_sparse',
-    ])
+benchmarks = collect_benchmarks(['vb_sparse'])
 
 log.info("Initializing settings")
 import sys

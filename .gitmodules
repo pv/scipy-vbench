@@ -2,3 +2,7 @@
 	path = vbench
 	url = http://github.com/yarikoptic/vbench
 	branch = enh/branches-support
+[submodule "scipy"]
+	path = scipy
+	url = https://github.com/scipy/scipy
+	branch = master
