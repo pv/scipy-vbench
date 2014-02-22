@@ -21,15 +21,6 @@ import os
 # sys.path.append(os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('../sphinxext'))
 
-sys.path.extend([
-
-    # numpy standard doc extensions
-    os.path.join(os.path.dirname(__file__),
-                 '..', '../..',
-                 'sphinxext')
-
-])
-
 # -- General configuration -----------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
@@ -59,9 +50,9 @@ copyright = u'2013, the NumPy development team'
 # built documents.
 #
 # The short X.Y version.
-import numpy
+import scipy
 
-version = '%s' % (numpy.__version__)
+version = '%s' % (scipy.__version__)
 
 # The full version, including alpha/beta/rc tags.
 release = version

@@ -2,14 +2,14 @@
 import logging, os, sys
 
 try:
-    import numpy
+    import scipy
 except ImportError:
     # yoh: In a clean chroot I use I disabled system-wide numpy altogether
     # as a paranoid measure to assure that benchmark scripts do not use it
     # anyhow.  Since they would not inherit this sys.path, I am pointing
     # to local numpy build, since it is needed for proper
     # collection/processing of benchmarks
-    sys.path.insert(1, os.path.join(os.getcwd(), "numpy"))
+    sys.path.insert(1, os.path.join(os.getcwd(), "scipy"))
 
 from vbench.api import BenchmarkRunner, verify_benchmarks
 from vbench.config import is_interactive
