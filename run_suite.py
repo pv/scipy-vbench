@@ -9,9 +9,14 @@ import argparse
 
 os.environ['PATH'] = os.pathsep.join(
     ['/usr/lib/ccache', '/usr/local/lib/f90cache']
-    + os.environ.get('PATH').split(os.pathsep)
+    + os.environ.get('PATH', '').split(os.pathsep)
     )
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), 'vbench')))
+vbench_pth = os.path.abspath(os.path.join(os.path.dirname(__file__), 'vbench'))
+sys.path.insert(0, vbench_pth)
+os.environ['PYTHONPATH'] = os.pathsep.join(
+    [vbench_pth] + os.environ.get('PYTHONPATH', '').split(os.pathsep)
+    )
+
 
 from vbench.api import BenchmarkRunner, verify_benchmarks
 from vbench.config import is_interactive
