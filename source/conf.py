@@ -42,8 +42,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'NumPy'
-copyright = u'2013, the NumPy development team'
+project = u'SciPy'
+copyright = u'2013, the SciPy development team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -119,7 +119,7 @@ html_theme_path = ['themes']
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = 'Vbench performance benchmarks for NumPy'
+html_title = 'Vbench performance benchmarks for SciPy'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 # html_short_title = None
@@ -189,7 +189,7 @@ htmlhelp_basename = 'performance'
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
     ('index', 'performance.tex',
-     u'NumPy vbench Performance Benchmarks',
+     u'SciPy vbench Performance Benchmarks',
      u'Yaroslav O. Halchenko', 'manual'),
 ]
 

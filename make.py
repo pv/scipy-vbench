@@ -1,6 +1,6 @@
 #!/usr/bin/env python
+"""make.py [COMMANDS]
 
-"""
 Python script for building documentation.
 
 To build the docs you must have all optional dependencies for statsmodels
@@ -9,17 +9,14 @@ installed. See the installation instructions for a list of these.
 Note: currently latex builds do not work because of table formats that are not
 supported in the latex generation.
 
-Usage
------
-python make.py clean
-python make.py html
 """
 
-import glob
 import os
 import shutil
+import argparse
 import sys
-import sphinx
+
+sys.path.insert(0, 'vbench')
 
 os.environ['PYTHONPATH'] = '..'
 
@@ -115,7 +112,7 @@ def check_build():
 def all():
     clean()
     html()
-    upload()
+    #upload()
 
 funcd = {
     'update'   : update,
@@ -128,17 +125,21 @@ funcd = {
 
 small_docs = False
 
-# current_dir = os.getcwd()
-# os.chdir(os.path.dirname(os.path.join(current_dir, __file__)))
+def main():
+    p = argparse.ArgumentParser(usage=__doc__.lstrip())
+    p.add_argument('commands', nargs='+',
+                   help=", ".join(sorted(funcd.keys())))
+    args = p.parse_args()
 
-if len(sys.argv)>1:
-    for arg in sys.argv[1:]:
-        func = funcd.get(arg)
-        if func is None:
-            raise SystemExit('Do not know how to handle %s; valid args are %s'%(
-                    arg, funcd.keys()))
-        func()
-else:
-    small_docs = False
-    all()
-#os.chdir(current_dir)
+    for arg in args.commands:
+        if arg not in funcd:
+            p.error('Do not know how to handle %s; valid args are %s' % (
+                arg, funcd.keys()))
+
+    for arg in args.commands:
+        funcd[arg]()
+
+    sys.exit(0)
+
+if __name__ == "__main__":
+    main()

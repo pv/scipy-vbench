@@ -1,40 +1,27 @@
 from datetime import datetime
 import logging
-import os, sys
+import os
 
 from vbench.api import collect_benchmarks
 
 log = logging.getLogger('vb')
 log.setLevel(logging.INFO)
-#log.addHandler(logging.StreamHandler(sys.stdout))
 
 benchmarks = collect_benchmarks(['vb_sparse'])
 
 log.info("Initializing settings")
-import sys
 
-try:
-    import ConfigParser
+cur_dir = os.path.dirname(__file__)
+REPO_PATH = os.path.join(cur_dir, 'scipy')
+REPO_URL = os.path.join(cur_dir, 'scipy')
+REPO_BROWSE = 'https://github.com/scipy/scipy'
+DB_PATH = os.path.join(cur_dir, 'db/benchmarks.db')
+TMP_DIR = os.path.join(cur_dir, 'tmp')
 
-    config = ConfigParser.ConfigParser()
-    config.readfp(open(os.path.expanduser('~/.vbenchcfg')))
-
-    REPO_PATH = config.get('setup', 'repo_path')
-    REPO_URL = config.get('setup', 'repo_url')
-    DB_PATH = config.get('setup', 'db_path')
-    TMP_DIR = config.get('setup', 'tmp_dir')
-except:
-    cur_dir = os.path.dirname(__file__)
-    REPO_PATH = os.path.join(cur_dir, 'scipy')
-    REPO_URL = 'git://github.com/scipy/scipy.git'
-    REPO_BROWSE = 'https://github.com/scipy/scipy'
-    #REPO_URL = '/home/yoh/proj/pymvpa/scipy-vbench/scipy'
-    DB_PATH = os.path.join(cur_dir, 'db/benchmarks.db')
-    TMP_DIR = os.path.join(cur_dir, 'tmp')
-    # Assure corresponding directories existence
-    for s in (REPO_PATH, os.path.dirname(DB_PATH), TMP_DIR):
-        if not os.path.exists(s):
-            os.makedirs(s)
+# Assure corresponding directories existence
+for s in (REPO_PATH, os.path.dirname(DB_PATH), TMP_DIR):
+    if not os.path.exists(s):
+        os.makedirs(s)
 
 BRANCHES = ['master']
 
@@ -68,7 +55,7 @@ dependencies = ['scipy_vb_common.py']
 
 # for now -- arbitrary day in the memorable past when scipy existed
 # already
-START_DATE = datetime(2011, 03, 01)
+START_DATE = datetime(2013, 03, 01)
 #START_DATE = datetime(2012, 06, 20)
 
 # Might not even be there and I do not see it used
