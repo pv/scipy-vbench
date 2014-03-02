@@ -1,5 +1,6 @@
 /db
 /tmp
 /tmp_tmp
+/build
 *.pyc
 *~
