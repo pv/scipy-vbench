@@ -1,6 +1,8 @@
-numpy-vbench provides a collection of speed performance of benchmarks
-for [NumPy](http://www.numpy.org).  Results of their execution are
-periodically published on http://yarikoptic.github.io/numpy-vbench/.
+scipy-vbench provides a collection of speed performance of benchmarks
+for [SciPy](http://www.numpy.org).
+
+Cloned from similar numpy-vbench project at
+http://yarikoptic.github.io/numpy-vbench/.
 
 Requirements
 ------------

@@ -13,7 +13,7 @@ log.info("Initializing settings")
 
 cur_dir = os.path.dirname(__file__)
 REPO_PATH = os.path.join(cur_dir, 'scipy')
-REPO_URL = os.path.join(cur_dir, 'scipy')
+REPO_URL = 'https://github.com/scipy/scipy.git'
 REPO_BROWSE = 'https://github.com/scipy/scipy'
 DB_PATH = os.path.join(cur_dir, 'db/benchmarks.db')
 TMP_DIR = os.path.join(cur_dir, 'tmp')
