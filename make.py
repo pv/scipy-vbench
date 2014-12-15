@@ -43,9 +43,11 @@ def upload():
     print "D: removing previous gh-pages branches locally and from the origin"
     os.system('git branch -D gh-pages ; git branch -rd origin/gh-pages; git gc --aggressive --prune=now ; ghp-import -p build/html -n; git push -f origin gh-pages')
 
+
 def clean():
     if os.path.exists('build'):
         shutil.rmtree('build')
+
 
 def generate_rsts():
     """Prepare build/source which acquires original RST_BASE with generated files placed in
