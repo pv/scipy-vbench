@@ -31,19 +31,20 @@ log = logging.getLogger('vb')
 
 
 def clone_repo():
-    git_dir = os.path.join(suite.REPO_PATH, '.git')
-    if not os.path.isdir(git_dir):
-        if os.path.isdir(suite.REPO_PATH):
-            shutil.rmtree(suite.REPO_PATH)
-        subprocess.check_call(['git', 'clone', '--mirror', suite.REPO_URL, suite.REPO_PATH])
-    subprocess.check_call(['git', '--git-dir', suite.REPO_PATH, 'remote', 'update'])
+    if not os.path.exists(suite.REPO_MIRROR):
+        subprocess.check_call(['git', 'clone', '--mirror', suite.REPO_URL, suite.REPO_MIRROR])
+    subprocess.check_call(['git', '--git-dir', suite.REPO_MIRROR, 'remote', 'update'])
+
+    if os.path.isdir(suite.REPO_PATH):
+        shutil.rmtree(suite.REPO_PATH)
+    subprocess.check_call(['git', 'clone', suite.REPO_MIRROR, suite.REPO_PATH])
 
 
 def run_process(existing='min', run_order='multires', run_limit=None, run_option='all'):
     clone_repo()
     runner = BenchmarkRunner(suite.benchmarks,
                              suite.REPO_PATH,
-                             suite.REPO_PATH,
+                             suite.REPO_MIRROR,
                              suite.BUILD,
                              suite.DB_PATH,
                              suite.TMP_DIR,

@@ -12,11 +12,12 @@ benchmarks = collect_benchmarks(['vb_sparse'])
 log.info("Initializing settings")
 
 cur_dir = os.path.dirname(__file__)
-REPO_PATH = os.path.join(cur_dir, 'scipy')
 REPO_URL = 'https://github.com/scipy/scipy.git'
 REPO_BROWSE = 'https://github.com/scipy/scipy'
 DB_PATH = os.path.join(cur_dir, 'db/benchmarks.db')
-TMP_DIR = os.path.join(cur_dir, 'tmp')
+REPO_MIRROR = os.path.join(cur_dir, 'scipy')
+REPO_PATH = os.path.join(cur_dir, 'tmp', 'scipy')
+TMP_DIR = os.path.join(cur_dir, 'tmp', 'tmp')
 
 # Assure corresponding directories existence
 for s in (REPO_PATH, os.path.dirname(DB_PATH), TMP_DIR):
