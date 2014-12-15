@@ -15,17 +15,19 @@ import os
 import shutil
 import argparse
 import sys
+import subprocess
 
 sys.path.insert(0, 'vbench')
 
-os.environ['PYTHONPATH'] = '..'
-
 SPHINX_BUILD = 'sphinxbuild'
 
-def update():
-    # building could be needed for verify
-    from suite import REPO_PATH
-    os.system('cd %s; git pull --ff-only; python setup.py build_ext --inplace' % REPO_PATH)
+def run():
+    subprocess.check_call([sys.executable, 'run_suite.py'])
+
+
+def run_full():
+    subprocess.check_call([sys.executable, 'run_suite.py', '--full'])
+
 
 def upload():
     'push a copy to the site'
