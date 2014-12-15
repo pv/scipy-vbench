@@ -7,6 +7,7 @@ import os
 import logging
 import argparse
 import subprocess
+import shutil
 
 os.environ['PATH'] = os.pathsep.join(
     ['/usr/lib/ccache', '/usr/local/lib/f90cache']
@@ -32,21 +33,10 @@ log = logging.getLogger('vb')
 def clone_repo():
     git_dir = os.path.join(suite.REPO_PATH, '.git')
     if not os.path.isdir(git_dir):
-        subprocess.check_call(['git', 'clone', '-o', 'origin', suite.REPO_URL, suite.REPO_PATH])
-
-    cwd = os.getcwd()
-    try:
-        os.chdir(suite.REPO_PATH)
-        subprocess.check_call(['git', 'fetch', 'origin'])
-        subprocess.check_call(['git', 'clean', '-dxf'])
-        subprocess.check_call(['git', 'reset', '--hard'])
-        subprocess.check_call(['git', 'checkout', 'master'])
-        for branch in suite.BRANCHES:
-            if branch != 'master':
-                subprocess.check_call(['git', 'branch', '-f', branch, 'origin/' + branch])
-        subprocess.check_call(['git', 'reset', '--hard', 'origin/master'])
-    finally:
-        os.chdir(cwd)
+        if os.path.isdir(suite.REPO_PATH):
+            shutil.rmtree(suite.REPO_PATH)
+        subprocess.check_call(['git', 'clone', '--mirror', suite.REPO_URL, suite.REPO_PATH])
+    subprocess.check_call(['git', '--git-dir', suite.REPO_PATH, 'remote', 'update'])
 
 
 def run_process(existing='min', run_order='multires', run_limit=None, run_option='all'):
