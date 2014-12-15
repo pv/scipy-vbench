@@ -18,8 +18,10 @@ import sys
 import subprocess
 
 sys.path.insert(0, 'vbench')
+sys.path.insert(0, 'benchmarks')
 
 SPHINX_BUILD = 'sphinxbuild'
+
 
 def run():
     subprocess.check_call([sys.executable, 'run_suite.py'])
@@ -119,7 +121,8 @@ def all():
     #upload()
 
 funcd = {
-    'update'   : update,
+    'run'      : run,
+    'run_full' : run_full,
     'html'     : html,
     'latex'    : latex,
     'clean'    : clean,
